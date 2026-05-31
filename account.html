@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller View | Refturnify</title>
+    <meta
+      name="description"
+      content="Minimal seller return review dashboard demo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="account">
+    <header class="site-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="index.html">Refturnify</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+        <div class="nav-links" id="site-nav">
+          <a href="index.html">Home</a>
+          <a href="returns.html">Return Form</a>
+          <a href="account.html">Seller View</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-shell">
+      <section class="inner-hero simple-hero">
+        <div>
+          <p class="eyebrow">Seller view</p>
+          <h1>Review returned items.</h1>
+          <p class="hero-text narrow">
+            This page shows how sellers can inspect return requests and update statuses.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-spacing">
+        <div class="dashboard-grid seller-grid">
+          <article class="simple-card stat-card">
+            <p class="eyebrow">Open returns</p>
+            <h2 id="open-returns-count">00</h2>
+          </article>
+          <article class="simple-card stat-card">
+            <p class="eyebrow">Seller approved</p>
+            <h2 id="approved-count">00</h2>
+          </article>
+          <article class="simple-card stat-card">
+            <p class="eyebrow">Refunded</p>
+            <h2 id="refunded-count">00</h2>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-spacing">
+        <article class="simple-card seller-table-card">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Seller dashboard</p>
+              <h2>Review incoming return items</h2>
+            </div>
+          </div>
+          <div class="request-stack" id="seller-requests"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-shell footer">
+      <p>Seller review demo.</p>
+      <div class="footer-actions">
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="returns.html">Return Form</a>
+        </div>
+        <button class="button button-secondary button-quiet" id="reset-demo" type="button">
+          Reset Demo
+        </button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

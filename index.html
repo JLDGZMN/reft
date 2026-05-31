@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Refturnify Demo</title>
+    <meta
+      name="description"
+      content="Minimal return and refund demo website with a customer return flow and a seller review view."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="home">
+    <header class="site-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="index.html">Refturnify</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+        <div class="nav-links" id="site-nav">
+          <a href="index.html">Home</a>
+          <a href="returns.html">Return Form</a>
+          <a href="account.html">Seller View</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-shell">
+      <section class="hero minimal-hero">
+        <p class="eyebrow">Demo website</p>
+        <h1>See how a return and refund flow can feel clean, simple, and trustworthy.</h1>
+        <p class="hero-text narrow">
+          This demo focuses on the customer return journey and the seller review side,
+          presented in a minimalist UI for portfolio or product showcase use.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="returns.html">Start a return</a>
+          <a class="button button-secondary" href="account.html">Open seller view</a>
+        </div>
+      </section>
+
+      <section class="section-spacing">
+        <div class="simple-grid">
+          <article class="simple-card">
+            <p class="eyebrow">Step 1</p>
+            <h2>Customer submits a request</h2>
+            <p>They enter an order number, choose a reason, and request a refund or exchange.</p>
+          </article>
+          <article class="simple-card">
+            <p class="eyebrow">Step 2</p>
+            <h2>Seller reviews returned items</h2>
+            <p>Returned products are grouped into a clean seller view for status checking and approval.</p>
+          </article>
+          <article class="simple-card">
+            <p class="eyebrow">Step 3</p>
+            <h2>Refund gets processed</h2>
+            <p>Once approved, the case moves to refunded, exchanged, or declined status.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-spacing">
+        <div class="section-heading single-column">
+          <div>
+            <p class="eyebrow">Demo products</p>
+            <h2>Example items that can enter the return flow</h2>
+          </div>
+        </div>
+        <div class="catalog-filters" aria-label="Catalog filters">
+          <button class="chip is-active" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="travel" type="button">Travel</button>
+          <button class="chip" data-filter="home" type="button">Home</button>
+          <button class="chip" data-filter="daily" type="button">Everyday</button>
+        </div>
+        <p class="results-count" id="results-count">12 products available</p>
+        <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-shell footer">
+      <p>Minimal return and refund flow demo.</p>
+      <div class="footer-actions">
+        <div class="footer-links">
+          <a href="returns.html">Return Form</a>
+          <a href="account.html">Seller View</a>
+        </div>
+        <button class="button button-secondary button-quiet" id="reset-demo" type="button">
+          Reset Demo
+        </button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

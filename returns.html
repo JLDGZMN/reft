@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Return Form | Refturnify</title>
+    <meta
+      name="description"
+      content="Minimal customer-facing return and refund form demo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="returns">
+    <header class="site-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="index.html">Refturnify</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+        <div class="nav-links" id="site-nav">
+          <a href="index.html">Home</a>
+          <a href="returns.html">Return Form</a>
+          <a href="account.html">Seller View</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="site-shell">
+      <section class="inner-hero simple-hero">
+        <div>
+          <p class="eyebrow">Customer return</p>
+          <h1>Request a return or refund.</h1>
+          <p class="hero-text narrow">
+            A simple form for demonstrating how a customer starts a return request.
+          </p>
+        </div>
+      </section>
+
+      <section class="return-layout simple-layout">
+        <article class="form-card" id="return-form">
+          <p class="eyebrow">Return details</p>
+          <div class="notice-banner" id="form-message" hidden>
+            Return request submitted. The selected items and proof images are now visible in the seller dashboard.
+          </div>
+          <form class="return-form" id="return-request-form" novalidate>
+            <label>
+              Order number
+              <input id="order-number" name="orderNumber" type="text" placeholder="LC-20481" required />
+            </label>
+            <label>
+              Email address
+              <input id="email-address" name="email" type="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Resolution
+              <select id="resolution-type" name="resolution" required>
+                <option value="">Choose a resolution</option>
+                <option>Refund</option>
+                <option>Exchange</option>
+                <option>Store credit</option>
+              </select>
+            </label>
+            <div class="line-items-block">
+              <div class="line-items-heading">
+                <div>
+                  <p class="eyebrow">Returned items</p>
+                  <h2>Add each product included in this request.</h2>
+                </div>
+                <button class="button button-secondary" id="add-return-item" type="button">
+                  Add another item
+                </button>
+              </div>
+              <div class="line-items-list" id="return-items"></div>
+            </div>
+            <button class="button button-primary" type="submit">Submit request</button>
+          </form>
+        </article>
+
+        <article class="simple-card guide-card">
+          <p class="eyebrow">How it works</p>
+          <ol class="timeline simple-timeline">
+            <li><strong>1.</strong><span>Customer submits one request with one or more items and proof photos.</span></li>
+            <li><strong>2.</strong><span>Seller checks the exact products, quantities, and uploaded images.</span></li>
+            <li><strong>3.</strong><span>Seller updates the final return status after verification.</span></li>
+          </ol>
+          <a class="button button-secondary full-width" href="account.html">Go to seller review view</a>
+        </article>
+      </section>
+
+      <section class="section-spacing">
+        <article class="simple-card request-history-card">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Buyer dashboard</p>
+              <h2>Your submitted return requests</h2>
+            </div>
+          </div>
+          <div class="request-stack" id="buyer-requests"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-shell footer">
+      <p>Customer-facing return form demo.</p>
+      <div class="footer-actions">
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="account.html">Seller View</a>
+        </div>
+        <button class="button button-secondary button-quiet" id="reset-demo" type="button">
+          Reset Demo
+        </button>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
