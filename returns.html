@@ -14,10 +14,22 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (() => {
+        const storedTheme = localStorage.getItem("refturnify-theme");
+        const resolvedTheme =
+          storedTheme === "light" || storedTheme === "dark"
+            ? storedTheme
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.setAttribute("data-theme", resolvedTheme);
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body data-page="returns">
-    <header class="site-shell">
+    <header class="site-shell site-header">
       <nav class="topbar" aria-label="Primary navigation">
         <a class="brand" href="index.html">Refturnify</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -27,6 +39,25 @@
           <a href="index.html">Home</a>
           <a href="returns.html">Return Form</a>
           <a href="account.html">Seller View</a>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label="Switch to dark mode"
+            aria-pressed="false"
+            title="Toggle dark mode"
+          >
+            <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V4.5a.75.75 0 0 1 .75-.75Zm0 14.25a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 18Zm8.25-6.75a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1 0-1.5h1.5ZM5.25 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 .75.75Zm10.834-5.584a.75.75 0 0 1 1.06 0l1.061 1.061a.75.75 0 1 1-1.06 1.06l-1.061-1.06a.75.75 0 0 1 0-1.061ZM6.856 15.644a.75.75 0 0 1 1.06 0l1.061 1.061a.75.75 0 0 1-1.06 1.06l-1.061-1.06a.75.75 0 0 1 0-1.061Zm11.349 1.06a.75.75 0 0 1 0 1.061l-1.06 1.06a.75.75 0 1 1-1.061-1.06l1.06-1.06a.75.75 0 0 1 1.061 0ZM7.917 6.416a.75.75 0 0 1 0 1.06L6.856 8.538a.75.75 0 1 1-1.06-1.06l1.06-1.062a.75.75 0 0 1 1.061 0ZM12 8.25A3.75 3.75 0 1 1 8.25 12 3.75 3.75 0 0 1 12 8.25Z" />
+              </svg>
+            </span>
+            <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75C12.615 15.75 8.25 11.385 8.25 6c0-1.312.259-2.563.728-3.706a.75.75 0 0 0-.966-.98A10.5 10.5 0 1 0 22.686 15.97a.75.75 0 0 0-.934-.968Z" />
+              </svg>
+            </span>
+          </button>
         </div>
       </nav>
     </header>

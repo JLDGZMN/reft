@@ -148,6 +148,7 @@ const products = [
 const STORAGE_KEY = "loop-return-requests-v2";
 const SELECTED_PRODUCT_KEY = "refturnify-selected-product";
 const SELECTED_ORDER_KEY = "refturnify-selected-order";
+const THEME_STORAGE_KEY = "refturnify-theme";
 const ACCEPTED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const MAX_IMAGE_SIZE_BYTES = 2 * 1024 * 1024;
 const MAX_IMAGES_PER_ITEM = 3;
@@ -316,6 +317,62 @@ function getPendingOrderNumber() {
 
 function clearPendingOrderNumber() {
   sessionStorage.removeItem(SELECTED_ORDER_KEY);
+}
+
+function systemPrefersDark() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function resolveInitialTheme() {
+  const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  return systemPrefersDark() ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+  const nextTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", nextTheme);
+
+  const toggle = document.getElementById("theme-toggle");
+  if (toggle instanceof HTMLButtonElement) {
+    const isDark = nextTheme === "dark";
+    toggle.setAttribute("aria-pressed", String(isDark));
+    toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+    toggle.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+  }
+}
+
+function setupTheme() {
+  applyTheme(resolveInitialTheme());
+
+  const toggle = document.getElementById("theme-toggle");
+  if (toggle instanceof HTMLButtonElement) {
+    toggle.addEventListener("click", () => {
+      const nextTheme =
+        document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+      applyTheme(nextTheme);
+    });
+  }
+
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const syncToSystemTheme = (event) => {
+    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    if (storedTheme === "light" || storedTheme === "dark") {
+      return;
+    }
+
+    applyTheme(event.matches ? "dark" : "light");
+  };
+
+  if (typeof mediaQuery.addEventListener === "function") {
+    mediaQuery.addEventListener("change", syncToSystemTheme);
+  } else if (typeof mediaQuery.addListener === "function") {
+    mediaQuery.addListener(syncToSystemTheme);
+  }
 }
 
 function productMarkup(product) {
@@ -1274,8 +1331,31 @@ function setupMenu() {
     const isOpen = topbar.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(isOpen));
   });
+
+  const navLinks = topbar.querySelectorAll(".nav-links a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      topbar.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  });
 }
 
+function setupStickyHeader() {
+  const header = document.querySelector(".site-header");
+  if (!header) {
+    return;
+  }
+
+  const updateStickyState = () => {
+    header.classList.toggle("is-stuck", window.scrollY > 8);
+  };
+
+  updateStickyState();
+  window.addEventListener("scroll", updateStickyState, { passive: true });
+}
+
+setupTheme();
 renderProducts();
 renderBuyerRequests();
 renderDashboards();
@@ -1287,3 +1367,4 @@ setupStorageSync();
 setupResetDemo();
 setupNavState();
 setupMenu();
+setupStickyHeader();
