@@ -930,6 +930,8 @@ function proofGalleryMarkup(item) {
 
 function requestCardMarkup(request, role = "buyer") {
   const summaryStatus = requestSummaryStatus(request);
+  const showSellerControl = role !== "buyer";
+  const showSummaryStatus = role !== "buyer";
 
   return `
     <article class="request-card">
@@ -938,7 +940,11 @@ function requestCardMarkup(request, role = "buyer") {
           <p class="eyebrow">Request ${escapeHtml(request.id)}</p>
           <h3>Order ${escapeHtml(request.orderNumber)}</h3>
         </div>
-        <span class="status-pill ${statusClass(summaryStatus)}">${escapeHtml(summaryStatus)}</span>
+        ${
+          showSummaryStatus
+            ? `<span class="status-pill ${statusClass(summaryStatus)}">${escapeHtml(summaryStatus)}</span>`
+            : ""
+        }
       </div>
       <div class="request-card-meta">
         <span>${escapeHtml(request.email)}</span>
@@ -961,14 +967,19 @@ function requestCardMarkup(request, role = "buyer") {
                     <h4>${escapeHtml(item.productName)}</h4>
                     <p>Quantity: ${escapeHtml(item.quantity)}</p>
                     <p>Reason: ${escapeHtml(item.reason)}</p>
+                    ${
+                      showSellerControl
+                        ? ""
+                        : `
                     <p>
                       Status:
                       <span class="status-pill ${statusClass(item.status)}">${escapeHtml(item.status)}</span>
-                    </p>
+                    </p>`
+                    }
                   </div>
                 </div>
                 ${proofGalleryMarkup(item)}
-                ${role === "buyer" ? "" : itemStatusControl(request.id, item, role)}
+                ${showSellerControl ? itemStatusControl(request.id, item, role) : ""}
               </article>
             `
           )
